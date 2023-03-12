@@ -2,8 +2,8 @@ const express = require('express');
 const RouteEvents = express.Router();
 
 // import controllers
-const eventsController = require('../controllers/eventsController');
-const attendeeController = require('../controllers/attendeeController');
+const eventsController = require('../Controllers/ControllerEvents');
+const attendeeController = require('../Controllers/ControllerAttendee');
 
 RouteEvents
         .get('/', eventsController.getAllEvents)

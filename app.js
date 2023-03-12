@@ -1,32 +1,33 @@
 const express = require('express');
 require('dotenv').config();
 
-// internal and external modules
-// const cookieParser = require('cookie-parser');
-// const authRoutes = require('./routes/authRoutes');
-// const attendeesRoutes = require('./routes/attendeesRoutes');
-// const eventsRoutes = require('./routes/eventsRoutes');
+// modules
+ const cookieParser = require('cookie-parser');
+ const RouteAuth = require('./AppRoutes/RouteAuth');
+ const RouteAttendees = require('./AppRoutes/RouteAttendees');
+ const RouteEvents = require('./AppRoutes/RouteEvents');
 const connectdb = require('./dbConfig/db.js');
-//const authenticate = require('./middlewares/authenticate');
+const authentication = require('./Middleware/Authentication');
+const auth = require('./Middleware/Authenication');
 
 
-// express app
-const app = express();
+const exp = express();
 
-// middlewares
-// app.use(express.json());
-// app.use(cookieParser())
+// middleware
+ exp.use(express.json());
+ exp.use(cookieParser())
 
 // routes
  app.get('/', (req, res) => {
-     res.send('Welcome to the Event Management API');
+     res.send('Welcome to My Event Management');
  });
-// app.use('/api/v1/auth', authRoutes);
-// app.use('/api/v1/events', authenticate, eventsRoutes);
-// app.use('/api/v1/attendees', authenticate, attendeesRoutes);
+
+exp.use('/api/v1/auth', RouteAuth);
+exp.use('/api/v1/event' ,authentication, RouteEvents);
+exp.use('/api/v1/attendees', authentication,RouteAttendees);
  
 
-// start app
+
 const PORT = 2021;
 connectdb();
 app.listen(PORT, () => {

@@ -13,7 +13,7 @@ const auth = (req, res, next) => {
             if (err) {
                 return res.status(401).send("log in!!!")
             }
-            // console.log(decoded)
+
             next();
         }
     )
