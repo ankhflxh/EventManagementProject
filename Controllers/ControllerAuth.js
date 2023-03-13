@@ -3,9 +3,11 @@ const Client = require('../models/Client');
 // import modules
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const sendMail = require('./NodeMailer/Email')
 
 exports.registerClient = async(req, res) => {
     const {email, password} = req.body;
+    
     if(!email || !password) {
         return res.status(400).json({error: 'Please provide email and password'});
     }
