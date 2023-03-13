@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 
 // modules
+const nodemailer = require('./NodeMailer/Email')
  const cookieParser = require('cookie-parser');
  const RouteAuth = require('./AppRoutes/RouteAuth');
  const RouteAttendees = require('./AppRoutes/RouteAttendees');
@@ -28,7 +29,7 @@ exp.use('/', auth,RouteAttendees);
  
 
 
-const PORT = 2021;
+const PORT = 3031;
 connectdb();
 exp.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
