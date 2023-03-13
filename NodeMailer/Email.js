@@ -3,13 +3,14 @@ const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     auth:{
-        client: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAILPASSWORD
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD
     }
     // Activate in gmail "less secure app" option
 })
 const SendEmail = async (to, subject, text) => {
     //create a transporter
+    //console.log(process.env.EMAIL_HOST)
     
     //define options for email
     const mailOptions = {
@@ -21,7 +22,7 @@ const SendEmail = async (to, subject, text) => {
     }
 
     //send the mail
-    await transporter.SendMail(mailOptions)
+    await transporter.sendMail(mailOptions)
 
 }
 module.exports = SendEmail

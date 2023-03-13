@@ -23,9 +23,9 @@ const exp = express();
      res.send('Welcome to My Event Management');
  });
 
-exp.use('/',RouteAuth);
-exp.use('/' ,auth, RouteEvents);
-exp.use('/', auth,RouteAttendees);
+exp.use('/auth',RouteAuth);
+exp.use('/event' ,auth, RouteEvents);
+exp.use('/attendee', auth,RouteAttendees);
  
 
 
