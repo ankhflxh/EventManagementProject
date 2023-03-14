@@ -29,8 +29,8 @@ exp.use('/attendee', auth,RouteAttendees);
  
 
 
-const PORT = 8090;
+const port = process.env.PORT
 connectdb();
-exp.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+exp.listen(port, () => {
+    console.log(`Listening on port ${port}`);
 })
