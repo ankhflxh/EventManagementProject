@@ -29,7 +29,7 @@ exp.use('/attendee', auth,RouteAttendees);
  
 
 
-const PORT = 9090;
+const PORT = 8090;
 connectdb();
 exp.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

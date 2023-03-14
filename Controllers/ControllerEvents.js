@@ -45,16 +45,16 @@ exports.getOneEvent = async (req, res) => {
         let LookEvent = await Event.findOne({_id: req.params.eventId});
         if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
 
-        //const attendees = await Attendee.find({});
+        const attendees = await Attendee.find({});
 
-        // LookEvent = {
-        //     event: LookEvent,
-        //     attendeees: attendees.filter(attendee => {
-        //         if(attendee.eventsIds.includes(LookEvent._id)){
-        //             return {name: attendee.name, email: attendee.email}
-        //         }
-        //     })
-        // }
+        LookEvent = {
+            event: LookEvent,
+            attendeees: attendees.filter(attendee => {
+                if(attendee.eventsIds.includes(LookEvent._id)){
+                    return {name: attendee.name, email: attendee.email}
+                }
+            })
+        }
             
         return res.json({LookEvent});
     } catch (error) {
