@@ -6,6 +6,6 @@ const auth = require ('../Middleware/Authenication')
 const attendeeController = require('../Controllers/ControllerAttendee');
 
 RouteAttendees
-        .get('/',auth, attendeeController.getAllAttendees)
-
+        .get('/GetTheAttendees',auth, attendeeController.GetTheAttendees)
+        .post('/CreateAttendee', auth, attendeeController.CreateAttendee)
 module.exports = RouteAttendees;
