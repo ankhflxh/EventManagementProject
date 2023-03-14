@@ -4,20 +4,23 @@ const Event = require('../models/Event');
 const SendEmail = require('../NodeMailer/Email')
 
 exports.CreateAttendee = async(req, res) => {
-    const Attendee = await Attendee.create({
+    const attendee = await Attendee.create({
         name : req.body.name, 
         email : req.body.email,
     
     })
-    res.send(Attendee)
+    res.send(attendee)
 }
 exports.GetTheAttendees = async(req, res) => {
-    const Attendee = await Attendee.find({
-        name : req.body.name, 
-        email : req.body.email,
-    
-    })
-    return Attendee
+    const attendees = await Attendee.find({})
+    res.send(attendees)
+}
+ exports.GetOneAttendee = async(req, res) => {
+    const id = req.params.id
+     const attendee = await Attendee.findOne({
+        _id : id
+     })
+     res.json(attendee)
 }
 exports.getAllAttendees = async(req, res) => {
     try {
