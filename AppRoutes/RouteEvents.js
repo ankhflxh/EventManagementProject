@@ -14,7 +14,7 @@ RouteEvents
         .get('/:eventId/attendees/:attendeeId', attendeeController.getOneAttendeeInOneEvent)
 
         .put('/:eventId/attendees/:attendeeId', attendeeController.editOneAttendeeForOneEvent)
-        .delete('/:eventId/attendees/:attendeeId', attendeeController.deleteOneAttendeeFromOneEvent)
+        .delete('DeleteAttendeeForEvent/:eventId/attendees/:attendeeId', attendeeController.deleteOneAttendeeFromOneEvent)
 
 
 module.exports = RouteEvents;
