@@ -1,5 +1,7 @@
 const Attendee = require('../models/Attendee');
 const Event = require('../models/Event');
+const SendEmail = require('../NodeMailer/Email')
+
 
 exports.getAllAttendees = async(req, res) => {
     try {
@@ -24,6 +26,7 @@ exports.createAttendeeForEvent = async (req, res) => {
 
         // if the attendee exists
         const LookAttendee = await Attendee.findOne({email});
+
         if(LookAttendee){
             // add the current event id 
             console.log()
@@ -42,6 +45,10 @@ exports.createAttendeeForEvent = async (req, res) => {
             email, 
             eventsIds: [LookEvent._id]
         });
+        const newClient = await Client.create({email, password: await bcrypt.hash(password, 10)});
+        await SendEmail(email, subject = 'ADDED TO EVENT', text = `Hello, You have been added to ${event}, please clarify if this is you by following and completing the 
+        instructions below. Thank you for complying with us
+        yours, ${name}`)
 
         // increase the attendees count in event
         LookEvent.attendeesCount++;
@@ -155,6 +162,10 @@ exports.deleteOneAttendeeFromOneEvent = async(req, res) => {
         //delete attendee from that event
         LookAttendee.eventsIds = LookAttendee.eventsIds.map(oneEventId => oneEventId !== eventId)
         LookAttendee.save();
+        const newClient = await Client.create({email, password: await bcrypt.hash(password, 10)});
+        await SendEmail(email, subject = 'DELETED FROM EVENT', text = `Hello, You have been deleted from ${event}, please clarify if this is you by following and completing the 
+        instructions below. Thank you for complying with us
+        yours, ${name}`)
 
         // decrease the attendees count in event
         LookEvent.attendeesCount--;
