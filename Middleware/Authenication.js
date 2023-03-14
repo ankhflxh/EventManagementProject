@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+//mkdcskwkbwcjuvbjswknmxpoqo2-30r84y37r4y3i
 
 const auth = (req, res, next) => {
     const authToken = req.cookies.jwt
