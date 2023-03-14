@@ -1,8 +1,13 @@
+const Client = require('../models/Client');
 const Attendee = require('../models/Attendee');
 const Event = require('../models/Event');
 const SendEmail = require('../NodeMailer/Email')
 
-
+exports.CreateAttendee = async(req, res) => {
+    await Attendee.create(
+        name = req.body.name, emai = req.body.email 
+    )
+}
 exports.getAllAttendees = async(req, res) => {
     try {
         const attendees = await Attendee.find({});
@@ -16,8 +21,8 @@ exports.getAllAttendees = async(req, res) => {
 exports.createAttendeeForEvent = async (req, res) => {
     try {
         //find the event
-        const LookEvent = await Event.findOne({_id: req.params.eventId});
-        if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
+        // const LookEvent = await Event.findOne({_id: req.params.eventId});
+        // if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
 
         const {name, email} = req.body;
         if(!name ||!email){
