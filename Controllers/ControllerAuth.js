@@ -1,4 +1,4 @@
-const Client = require('../models/Client');
+const Client = require('../Models/Client');
 
 // import modules
 const bcrypt = require('bcrypt');

@@ -1,6 +1,6 @@
-const Client = require('../models/Client');
-const Attendee = require('../models/Attendee');
-const Event = require('../models/Event');
+const Client = require('../Models/Client');
+const Attendee = require('../Models/Attendee');
+const Event = require('../Models/Event');
 const SendEmail = require('../NodeMailer/Email')
 
 exports.CreateAttendee = async(req, res) => {
