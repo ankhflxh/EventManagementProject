@@ -42,21 +42,21 @@ exports.getAllEvents = async (req, res) => {
 
 exports.getOneEvent = async (req, res) => {
     try {
-        let LookEvent = await Event.findById(req.params.eventId);
+        let LookEvent = await Event.findOne({_id: req.params.eventId});
         if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
 
-        const attendees = await Attendee.find({});
+        //const attendees = await Attendee.find({});
 
-        LookEvent = {
-            event: LookEvent,
-            attendeees: attendees.filter(attendee => {
-                if(attendee.eventsIds.includes(LookEvent._id)){
-                    return {name: attendee.name, email: attendee.email}
-                }
-            })
-        }
+        // LookEvent = {
+        //     event: LookEvent,
+        //     attendeees: attendees.filter(attendee => {
+        //         if(attendee.eventsIds.includes(LookEvent._id)){
+        //             return {name: attendee.name, email: attendee.email}
+        //         }
+        //     })
+        // }
             
-        res.json(LookEvent);
+        return res.json({LookEvent});
     } catch (error) {
         console.log(error);
         res.status(500).json({error: error.message});

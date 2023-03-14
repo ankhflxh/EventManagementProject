@@ -6,9 +6,9 @@ const eventsController = require('../Controllers/ControllerEvents');
 const attendeeController = require('../Controllers/ControllerAttendee');
 
 RouteEvents
-        .get('/', eventsController.getAllEvents)
-        .post('/', eventsController.createEvent)
-        .get('/:eventId', eventsController.getOneEvent)
+        .get('/GetAllEvents', eventsController.getAllEvents)
+        .post('/CreateEvent', eventsController.createEvent)
+        .get('/GetOneEvent/:eventId', eventsController.getOneEvent)
         .get('/:eventId/attendees', attendeeController.getAttendeesOfOneEvent)
         .post('/:eventId/attendees', attendeeController.createAttendeeForEvent)
         .get('/:eventId/attendees/:attendeeId', attendeeController.getOneAttendeeInOneEvent)
