@@ -3,4 +3,4 @@ password for mail trap : betty123
 
 RENDER LINK: https://myeventmanagement-com.onrender.com/
 
-POSTMAN DOCUMENTATION LINK: https://api.getpostman.com/collections/23596873-8deb6aeb-e508-4982-9ab3-f2d3046d784a
+POSTMAN DOCUMENTATION LINK: https://documenter.getpostman.com/view/23596873/2s93JwMghB
