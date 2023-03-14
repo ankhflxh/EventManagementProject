@@ -10,7 +10,7 @@ RouteEvents
         .post('/CreateEvent', eventsController.createEvent)
         .get('/GetOneEvent/:eventId', eventsController.getOneEvent)
         .get('/:eventId/attendees', attendeeController.getAttendeesOfOneEvent)
-        .post('/:eventId/attendees', attendeeController.createAttendeeForEvent)
+        .post('/CreateAttendeeForEvent/:eventId/attendees', attendeeController.createAttendeeForEvent)
         .get('/:eventId/attendees/:attendeeId', attendeeController.getOneAttendeeInOneEvent)
 
         .put('/:eventId/attendees/:attendeeId', attendeeController.editOneAttendeeForOneEvent)

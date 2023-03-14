@@ -35,8 +35,8 @@ exports.getAllAttendees = async(req, res) => {
 exports.createAttendeeForEvent = async (req, res) => {
     try {
         //find the event
-        // const LookEvent = await Event.findOne({_id: req.params.eventId});
-        // if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
+        const LookEvent = await Event.findOne({_id: req.params.eventId});
+        if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
 
         const {name, email} = req.body;
         if(!name ||!email){
@@ -44,34 +44,30 @@ exports.createAttendeeForEvent = async (req, res) => {
         }
 
         // if the attendee exists
-        const LookAttendee = await Attendee.findOne({email});
+        const lookAttendee = await Attendee.findOne({email});
 
-        if(LookAttendee){
+        if(lookAttendee){
             // add the current event id 
-            console.log()
-            LookAttendee.eventsIds.push(req.params.eventId)
-            LookAttendee.save();
+        
+            lookAttendee.eventsIds.push(req.params.eventId)
+            lookAttendee.save();
 
             return res.status(201).json({
                 "message": "Attendee created successfully!!!",
-                attendee: LookAttendee
+                attendee: lookAttendee
             })
         }
 
         // if the attendee does not exist before
-        const newAttendee = await Attendee.create({
-            name,
-            email, 
-            eventsIds: [LookEvent._id]
-        });
+        
         const newClient = await Client.create({email, password: await bcrypt.hash(password, 10)});
-        await SendEmail(email, subject = 'ADDED TO EVENT', text = `Hello, You have been added to ${event}, please clarify if this is you by following and completing the 
+        await SendEmail(email, subject = 'ADDED TO EVENT', text = `Hello, You have been added to ${}, please clarify if this is you by following and completing the 
         instructions below. Thank you for complying with us
         yours, ${name}`)
 
         // increase the attendees count in event
-        LookEvent.attendeesCount++;
-        LookEvent.save();
+        // LookEvent.attendeesCount++;
+         LookEvent.save();
 
         res.status(201).json({
             "message": "Attendee created successfully",
@@ -114,16 +110,16 @@ exports.getOneAttendeeInOneEvent = async (req, res) => {
         if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
 
         // get all attendeess
-        const LookAttendee = await Attendee.findOne({_id: attendeeId});
-        if(!LookAttendee) return res.status(404).json({message: `Attendee with id '${attendeeId}' not found`});
+        const lookAttendee = await Attendee.findOne({_id: attendeeId});
+        if(!lookAttendee) return res.status(404).json({message: `Attendee with id '${attendeeId}' not found`});
 
-        if(!LookAttendee.eventsIds.includes(eventId)){
+        if(!lookAttendee.eventsIds.includes(eventId)){
             return res.json({message: `Attendee with id '${attendeeId}' is not going for event "${eventId}"`});
         }
 
         res.json({
             event: LookEvent.name,
-            attendee: LookAttendee
+            attendee: lookAttendee
         })
 
          
@@ -142,10 +138,10 @@ exports.editOneAttendeeForOneEvent = async(req, res) => {
         if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
 
         //find the attendee and confirm if he is attending that event
-        const LookAttendee = await Attendee.findOne({_id: attendeeId});
-        if(!LookAttendee) return res.status(404).json({message: `Attendee with id '${attendeeId}' not found`});
+        const lookAttendee = await Attendee.findOne({_id: attendeeId});
+        if( lookAttendee) return res.status(404).json({message: `Attendee with id '${attendeeId}' not found`});
 
-        if(!LookAttendee.eventsIds.includes(eventId)){
+        if( lookAttendee.eventsIds.includes(eventId)){
             return res.json({message: `Attendee with id '${attendeeId}' is not going for event '${eventId}'`});
         }
 
@@ -171,16 +167,16 @@ exports.deleteOneAttendeeFromOneEvent = async(req, res) => {
         if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
 
         //find the attendee and confirm if he is attending that event
-        let LookAttendee = await Attendee.findById(attendeeId);
-        if(!LookAttendee) return res.status(404).json({message: `Attendee with id '${attendeeId}' not found`});
+        let lookAttendee = await Attendee.findById(attendeeId);
+        if( lookAttendee) return res.status(404).json({message: `Attendee with id '${attendeeId}' not found`});
 
-        if(!LookAttendee.eventsIds.includes(eventId)){
+        if( lookAttendee.eventsIds.includes(eventId)){
             return res.json({message: `Attendee with id '${attendeeId}' is not going for event '${eventId}'`});
         }
 
         //delete attendee from that event
-        LookAttendee.eventsIds = LookAttendee.eventsIds.map(oneEventId => oneEventId !== eventId)
-        LookAttendee.save();
+     lookAttendee.eventsIds = lookAttendee.eventsIds.map(oneEventId => oneEventId !== eventId)
+     lookAttendee.save();
         const newClient = await Client.create({email, password: await bcrypt.hash(password, 10)});
         await SendEmail(email, subject = 'DELETED FROM EVENT', text = `Hello, You have been deleted from ${event}, please clarify if this is you by following and completing the 
         instructions below. Thank you for complying with us

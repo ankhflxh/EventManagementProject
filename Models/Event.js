@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const EventSchema = new mongoose.Schema({
     name:{
@@ -21,10 +22,10 @@ const EventSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    attendeesCount : {
-        type: Number,
-        default: 0
-    }
+    attendees: [{
+        type : mongoose.Schema.Types.ObjectId, 
+        ref: 'Attendee'
+    }]
 })
 
 module.exports = mongoose.model('Event', EventSchema);

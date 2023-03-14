@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const AttendeeSchema = new mongoose.Schema({
     name: {
@@ -10,7 +11,7 @@ const AttendeeSchema = new mongoose.Schema({
         required: true
     },
     eventsIds : [{
-        type: String
+        type: mongoose.Schema.Types.ObjectId, ref: 'Event'
     }]
 })
 
