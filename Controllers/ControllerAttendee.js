@@ -179,7 +179,7 @@ exports.deleteOneAttendeeFromOneEvent = async(req, res) => {
 
         //delete attendee from that event
      lookAttendee.eventsIds = lookAttendee.eventsIds.map(oneEventId => oneEventId !== eventId)
-     lookAttendee.save();
+     
      const attendee = await Attendee.create({name ,email});
      await  SendEmail(email, subject = 'REMOVED FROM TO EVENT', text = `
      Hello, You have been removed to this event, please clarify if this is you by following and completing the 
