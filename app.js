@@ -30,9 +30,9 @@ const exp = express();
     res.send("Dashboard Page")
  })
 
- exp.get('/admin',authClient,authRole(ROLE.admin), (req, res) => {
-    res.send("Admin Page")
- })
+//  exp.get('/admin',authClient,authRole(ROLE.admin), (req, res) => {
+//     res.send("Admin Page")
+//  })
 
 exp.use('/auth',RouteAuth);
 exp.use('/event' ,auth, RouteEvents);

@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "test": "jest ==watchAll",
     "dev": "nodemon app.js"
   },
   "keywords": [],
@@ -19,5 +20,12 @@
     "nodemailer": "^6.9.1",
     "nodemon": "^2.0.21",
     "pug": "^3.0.2"
+  },
+  "jest":{
+    "modulePathIgnorePatterns": ["app.js"]
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3"
   }
 }
