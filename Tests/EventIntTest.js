@@ -84,7 +84,7 @@ describe("Integration test for My Event Management System", ()=> {
 
 
     it('POST /event/CreateEvent = success = post an event',  async()=>{
-        const {body, statusCode} = await request(app).post('/event/CreateEvent')
+        const {body, statusCode} = await request(app).post('/event/CreateEvent').send
 
         expect(body).toEqual(
             expect.arrayContaining([
@@ -101,7 +101,7 @@ describe("Integration test for My Event Management System", ()=> {
     })
 
     it('POST /event/CreateAttendeeForEvent/:eventId/attendees = success = post an attendee for event',  async()=>{
-        const {body, statusCode} = await request(app).post('/event/CreateAttendeeForEvent/:eventId/attendees')
+        const {body, statusCode} = await request(app).post('/event/CreateAttendeeForEvent/:eventId/attendees').send
 
         expect(body).toEqual(
             expect.arrayContaining([
@@ -118,7 +118,7 @@ describe("Integration test for My Event Management System", ()=> {
     })
 
     it('PUT /event/:eventId/attendees/:attendeeId = success = update an attendee for event',  async()=>{
-        const {body, statusCode} = await request(app).put('/event/:eventId/attendees/:attendeeId')
+        const {body, statusCode} = await request(app).put('/event/:eventId/attendees/:attendeeId').send
 
         expect(body).toEqual(
             expect.arrayContaining([

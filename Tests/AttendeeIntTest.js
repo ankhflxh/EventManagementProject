@@ -39,7 +39,7 @@ describe("Integration test for My Event Management System", ()=> {
     })
 
     it('POST /attendee/CreateAttendee = success = get one attendees',  async()=>{
-        const {body, statusCode} = await request(app).post('/attendee/CreateAttendee')
+        const {body, statusCode} = await request(app).post('/attendee/CreateAttendee').send
 
         expect(body).toEqual(
             expect.arrayContaining([

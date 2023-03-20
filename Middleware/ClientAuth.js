@@ -1,3 +1,4 @@
+const role = require('../data')
 function authClient(req, res,next){
     if (req.client == null){
         res.status(403)
@@ -8,7 +9,7 @@ function authClient(req, res,next){
 
 function authRole(role){
     return (req, res, next) => {
-        if (req.client.role == role){
+        if (req.client.role !== role){
             res.status(401)
             return res.send('PERMISSION DENIED')
         }
