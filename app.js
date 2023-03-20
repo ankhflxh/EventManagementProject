@@ -1,4 +1,5 @@
 const express = require('express');
+const exp = express();
 require('dotenv').config();
 
 // modules
@@ -14,8 +15,16 @@ const auth = require('./Middleware/Authenication');
 const role = require('./data');
 const { events } = require('./Models/Event');
 
+var bodyParser = require('body-parser')
 
-const exp = express();
+
+// parse application/x-www-form-urlencoded
+exp.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+exp.use(bodyParser.json())
+
+
 exp.use('/auth',RouteAuth);
 exp.use('/event' ,auth, RouteEvents);
 exp.use('/attendee', auth,RouteAttendees);
