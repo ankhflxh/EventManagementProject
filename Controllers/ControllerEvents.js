@@ -1,7 +1,6 @@
 const Event = require('../Models/Event');
 const Attendee = require('../Models/Attendee');
-const { authClient } = require('../Middleware/ClientAuth')
-const { canViewEvents, scopeProjects } = require('../permissions')
+
 
 exports.createEvent = async (req, res) => {
     const {name, date, location, description} = req.body;
@@ -19,7 +18,7 @@ exports.createEvent = async (req, res) => {
 }
 
 
-exports.getAllEvents = authClient, async (req, res) => {
+exports.getAllEvents =  async (req, res) => {
     try {
         let events = await Event.find({});
         const attendees = await Attendee.find({});

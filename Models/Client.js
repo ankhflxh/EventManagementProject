@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const {ADMIN,CLIENT} = require('../data')
 
 const ClientSchema = new mongoose.Schema({
     name:{
@@ -11,6 +12,10 @@ const ClientSchema = new mongoose.Schema({
     password:{
         type: String,
         required: true
+    },
+    role: {
+        type : String,
+        enum: [ADMIN,CLIENT] 
     }
 })
 

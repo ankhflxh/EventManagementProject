@@ -1,5 +1,8 @@
-GET http://localhost:7000/dashboard
+POST  http://localhost:7000/auth/register
 Content-Type: application/json
+
 {
-    "clientId": 
+    "name": "Ebuka",
+    "email": "ebuks@gmail.com",
+    "password": "test123"
 }

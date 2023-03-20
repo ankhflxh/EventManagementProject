@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 //mkdcskwkbwcjuvbjswknmxpoqo2-30r84y37r4y3i
 
 const auth = (req, res, next) => {
-    const authToken = req.cookies.jwt
+    const authToken = req?.header('Authorization')?.split(' ')[1];
     
     if (!authToken) {
         return res.status(401).send(" PLEASE LOGIN ")
@@ -14,7 +14,8 @@ const auth = (req, res, next) => {
             if (err) {
                 return res.status(401).send(" PLEASE LOGIN ")
             }
-            
+            req.client = decoded
+            req.token = authToken
             next();
         }
     )

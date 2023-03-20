@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken');
 const SendEmail = require('../NodeMailer/Email')
 
 exports.registerClient = async(req, res) => {
-    const {email, password, name}  = req.body;
+    console.log(req.body)
+    const {name, email, password}  = req.body;
     
     if(!email || !password) {
         return res.status(400).json({error: 'Please provide email and password'});
@@ -58,7 +59,7 @@ exports.loginClient = async(req, res) => {
         }
 
         const authToken = jwt.sign(
-            { email: foundClient.email },
+            { ...foundClient },
             process.env.SECRET_KEY,
             { expiresIn: 3600 * 60 }
         )
