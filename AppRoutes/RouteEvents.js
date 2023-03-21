@@ -23,8 +23,11 @@ RouteEvents.get(
   )
   .get(
     "/GetAttendeeOfOneEvent/:eventId/attendees",
+    auth,
+    authRole("admin"),
     attendeeController.getAttendeesOfOneEvent
   )
+  .patch("/UserUpdateEvent/:eventId", auth, eventsController.userUpdateEvent)
   .post(
     "/CreateAttendeeForEvent/:eventId/attendees",
     attendeeController.createAttendeeForEvent
