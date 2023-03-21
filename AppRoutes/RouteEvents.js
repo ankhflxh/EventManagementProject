@@ -3,7 +3,7 @@ const RouteEvents = express.Router();
 const auth = require("../Middleware/Authenication");
 const { authRole } = require("../Middleware/ClientAuth");
 
-// import controllers
+// import the controllers
 const eventsController = require("../Controllers/ControllerEvents");
 const attendeeController = require("../Controllers/ControllerAttendee");
 
