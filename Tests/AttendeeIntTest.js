@@ -1,14 +1,15 @@
 const express = require("express")
-const request = require("supertest")
-const attendeeRoute = reuire('./AppRoute/RouteAttendee')
+const request = require("supertest");
+const RouteAttendees = require("../AppRoutes/RouteAttendees");
+const attendeeRoute = require('../AppRoutes/RouteAttendees')
 
 
 const app = express();
-app.use(express.json)
-app.use('/attendee', auth,RouteAttendees);
+app.use(express.json())
+app.use('/attendee',RouteAttendees) ;
 
 describe("Integration test for My Event Management System", ()=> {
-    it('GET /attendee/GetTheAttendees = success = get all attendees',  async()=>{
+    it('GET /attendee/GetTheAttendees - success - get all attendees',  async()=>{
         const {body, statusCode} = await request(app).get('/attendee/GetTheAttendees')
 
         expect(body).toEqual(
@@ -52,4 +53,10 @@ describe("Integration test for My Event Management System", ()=> {
         )
         expect(statusCode).toBe(200)
     })
+})
+
+const port = process.env.PORT
+connectdb();
+exp.listen(port, () => {
+    console.log(`Listening on port ${port}`);
 })

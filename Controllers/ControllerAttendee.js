@@ -74,7 +74,7 @@ exports.createAttendeeForEvent = async (req, res) => {
 
         res.status(201).json({
             "message": "Attendee created successfully",
-            attendee: newAttendee
+            //attendee: newAttendee
         })
 
     } catch (error) {

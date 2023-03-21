@@ -7,9 +7,9 @@ const app = express();
 
 app.use(express.json)
 
-//app.use('/auth',RouteAuth);
+
 app.use('/event' ,auth, RouteEvents);
-//app.use('/attendee', auth,RouteAttendees);
+
 
 
 describe("Integration test for My Event Management System", ()=> {
