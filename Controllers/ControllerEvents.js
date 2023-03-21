@@ -9,7 +9,7 @@ exports.createEvent = async (req, res) => {
     }
 
     try {
-        const newEvent = await Event.create({name, date, location, description});
+        const newEvent = await Event.create({name, date, location, description, clientId: req.client._doc._id});
         res.status(201).json({"message": "Event created successfully", event: {...newEvent._doc, attendees: []}});
     } catch (error) {
         console.log(error);
@@ -20,20 +20,7 @@ exports.createEvent = async (req, res) => {
 
 exports.getAllEvents =  async (req, res) => {
     try {
-        let events = await Event.find({});
-        const attendees = await Attendee.find({});
-
-        events = events.map(event => {
-            return {
-                ...event._doc, 
-                attendees: attendees.filter(attendee => {
-                    if(attendee.eventsIds.includes(event._id)){
-                        return {name: attendee.name, email: attendee.email}
-                    }
-                })
-            }
-        })
-
+        let events = await Event.find({}).populate('attendees', 'name email');
         res.json(events);
     } catch (error) {
         console.log(error);
@@ -41,25 +28,31 @@ exports.getAllEvents =  async (req, res) => {
     }
 }
 
+exports.getUserEvent = async (req, res) => {
+    try{
+        let events = await Event.find({ clientId: req.client._doc._id }).populate('attendees', 'name email');
+        if (events === null) {
+            res.send("No event have been created");
+            return;
+        }
+        res.json(events);
+    }catch (error){ 
+        res.status(500).json({ error: error.message });
+    }
+}
+
 exports.getOneEvent = async (req, res) => {
     try {
-        let LookEvent = await Event.findOne({_id: req.params.eventId});
+        let LookEvent = await Event.findOne({ _id: req.params.eventId, clientId: req.client._doc._id }).populate('attendees', 'name email');
         if(!LookEvent) return res.status(404).json({message: `Event with id '${req.params.eventId}' not found`});
-
-        const attendees = await Attendee.find({});
-
-        LookEvent = {
-            event: LookEvent,
-            attendeees: attendees.filter(attendee => {
-                if(attendee.eventsIds.includes(LookEvent._id)){
-                    return {name: attendee.name, email: attendee.email}
-                }
-            })
-        }
             
         return res.json({LookEvent});
     } catch (error) {
         console.log(error);
         res.status(500).json({error: error.message});
     }
+}
+
+exports.userUpdateEvent = async (req, res) => {
+    
 }
