@@ -1,6 +1,7 @@
+const connectdb = require('../dbConfig/db.js');
 const express = require("express")
 const request = require("supertest")
-const eventRoute = reuire('./AppRoute/RouteEvents')
+const eventRoute = require('../AppRoutes/RouteEvents')
 
 
 const app = express();

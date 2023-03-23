@@ -1,7 +1,8 @@
+const connectdb = require('../dbConfig/db.js');
 const express = require("express")
 const request = require("supertest");
-const RouteAttendees = require("../AppRoutes/RouteAttendees");
-const attendeeRoute = require('../AppRoutes/RouteAttendees')
+const RouteAttendees = require("../AppRoutes/RouteAttendees")
+
 
 
 const app = express();
