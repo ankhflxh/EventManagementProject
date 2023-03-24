@@ -27,7 +27,7 @@ RouteEvents.get(
     authRole("admin"),
     attendeeController.getAttendeesOfOneEvent
   )
-  .patch("/UserUpdateEvent/:eventId", auth, eventsController.userUpdateEvent)
+  .put("/UserUpdateEvent/:eventId", auth, eventsController.userUpdateEvent)
   .post(
     "/CreateAttendeeForEvent/:eventId/attendees",
     attendeeController.createAttendeeForEvent

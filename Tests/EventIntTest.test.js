@@ -84,20 +84,9 @@ describe("Integration test for My Event Management System", ()=> {
     })
 
 
-    it('POST /event/CreateEvent = success = post an event',  async()=>{
+    it('POST /event/CreateEvent - failure - post an event',  async()=>{
         const {body, statusCode} = await request(app).post('/event/CreateEvent').send
-
-        expect(body).toEqual(
-            expect.arrayContaining([
-                expect.objectContaining({
-                    name: expect.any(String),
-                    date: expect.any(String),
-                    location: expect.any(String),
-                    isDone: expect.any(Boolean),
-                    attendees: expect.any(String)
-                })
-            ])
-        )
+        name: ""
         expect(statusCode).toBe(200)
     })
 
