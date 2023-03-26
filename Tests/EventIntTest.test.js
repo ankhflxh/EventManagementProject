@@ -1,12 +1,16 @@
 const connectdb = require('../dbConfig/db.js');
 const express = require("express")
 const request = require("supertest")
-const eventRoute = require('../AppRoutes/RouteEvents')
+const RouteEvents = require('../AppRoutes/RouteEvents')
+
+const auth = require('../Middleware/Authenication')
+
 
 
 const app = express();
 
 app.use(express.json)
+require('dotenv').config();
 
 
 app.use('/event' ,auth, RouteEvents);

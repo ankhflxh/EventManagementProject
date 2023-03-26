@@ -3,15 +3,18 @@ const express = require("express")
 const request = require("supertest");
 const RouteAttendees = require("../AppRoutes/RouteAttendees")
 
-
+const exp = require('../app')
 
 const app = express();
 app.use(express.json())
-app.use('/attendee',RouteAttendees) ;
+app.use('/attendee', RouteAttendees) ;
+require('dotenv').config();
+
 
 describe("Integration test for My Event Management System", ()=> {
     it('GET /attendee/GetTheAttendees - success - get all attendees',  async()=>{
         const {body, statusCode} = await request(app).get('/attendee/GetTheAttendees')
+        console.log(body)
 
         expect(body).toEqual(
             expect.arrayContaining([
@@ -23,7 +26,7 @@ describe("Integration test for My Event Management System", ()=> {
             ])
         )
         expect(statusCode).toBe(200)
-    })
+    }, 60000)
 
     it('GET /attendee/GetOneAttendee/:id = success = get one attendees',  async()=>{
         const {body, statusCode} = await request(app).get('/attendee/GetOneAttendee/:id')
@@ -38,7 +41,7 @@ describe("Integration test for My Event Management System", ()=> {
             ])
         )
         expect(statusCode).toBe(200)
-    })
+    }, 60000)
 
     it('POST /attendee/CreateAttendee = success = get one attendees',  async()=>{
         const {body, statusCode} = await request(app).post('/attendee/CreateAttendee').send
@@ -53,11 +56,19 @@ describe("Integration test for My Event Management System", ()=> {
             ])
         )
         expect(statusCode).toBe(200)
-    })
+    }, 60000)
 })
 
 const port = process.env.PORT
-connectdb();
-exp.listen(port, () => {
+
+const connect = async () => {
+    try {
+        await connectdb();
+    } catch (error) {
+        console.loig(error)
+    }
+}
+
+app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 })

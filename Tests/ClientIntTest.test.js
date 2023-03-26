@@ -1,12 +1,16 @@
 const connectdb = require('../dbConfig/db.js');
 const express = require("express")
 const request = require("supertest")
-const attendeeRoute = require('../AppRoutes/RouteAuth')
+const RouteAuth = require('../AppRoutes/RouteAuth')
+
+const auth = require('../Middleware/Authenication')
 
 
 const app = express();
+require('dotenv').config();
+
 app.use(express.json)
-app.use('/auth', auth,RouteAuth);
+app.use('/auth', auth, RouteAuth);
 
 describe("Integration test for My Event Management System", ()=> {
     it('POST /auth/register = failure to register',  async()=>{
